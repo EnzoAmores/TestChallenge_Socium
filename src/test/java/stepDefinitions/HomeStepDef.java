@@ -18,7 +18,7 @@ import utilities.Helpers;
 public class HomeStepDef extends Helpers implements HomePOs {
     WebDriver webDriver = Base.getWebDriver();
     List<WebElement> rowEntry;
-
+    String foodGridIDSearched;
 
     public HomeStepDef() {
     }
@@ -37,15 +37,17 @@ public class HomeStepDef extends Helpers implements HomePOs {
     public void searchByID(String foodGridID) {
         webDriver.findElement(_COOKIE_MESSAGE_OK_BUTTON).click();
 
-        rowEntry = getRowFromTable(_FOOD_GRID_BASE_ROW(foodGridID), _FOOD_GRID_PAGES(), _FOOD_GRID_PAGE_SIZE_DROPDOWN(), _FOOD_GRID_PAGE_SIZE_DROPDOWN_CHOICES("100"));
+        foodGridIDSearched = foodGridID;
+
+        rowEntry = getRowFromTable(_FOOD_GRID_BASE_ROW(foodGridIDSearched), _FOOD_GRID_PAGES(), _FOOD_GRID_PAGE_SIZE_DROPDOWN(), _FOOD_GRID_PAGE_SIZE_DROPDOWN_CHOICES("100"));
     }
 
     @Then("I will get the row data for that entry")
     public void displayRowData() {
         if (rowEntry.isEmpty()) {
-            System.out.println("No data found for the ID: " + System.getProperty("FoodGridID"));
+            System.out.println("No data found for the ID: " + foodGridIDSearched);
         } else {
-            System.out.println("Input ID Number: " + System.getProperty("FoodGridID"));
+            System.out.println("Input ID Number: " + foodGridIDSearched);
             System.out.println("Person: " + rowEntry.get(1).getText());
             System.out.println("Food: " + rowEntry.get(2).getText());
             System.out.println("Date: " + rowEntry.get(4).getText());
