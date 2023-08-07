@@ -21,11 +21,14 @@ public class Helpers {
         return result;
     }
 
-    public List<WebElement> getRowFromTable(By tableLocator, By pageLocator) {
+    public List<WebElement> getRowFromTable(By tableLocator, By pageLocator, By pageSizeDropdownLocator, By pageSizeDropdownChoices) {
         List<WebElement> rows = null;
         List<WebElement> pages = null;
         int pageTotalCount = 1;
         int currentPage = 1;
+
+        webDriver.findElement(pageSizeDropdownLocator).click();
+        webDriver.findElement(pageSizeDropdownChoices).click();
 
         pages = webDriver.findElements(pageLocator);
         pageTotalCount = Integer.parseInt(pages.get(pages.size() - 1).getText());
@@ -39,7 +42,7 @@ public class Helpers {
 
             currentPage++;
         }
-        
+
         return rows;
     }
 

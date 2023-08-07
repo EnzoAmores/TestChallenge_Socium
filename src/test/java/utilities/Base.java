@@ -23,7 +23,7 @@ public class Base {
 
         webDriver = getWebDriver();
 
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
 
         return webDriver;
     }
